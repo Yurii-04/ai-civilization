@@ -1,6 +1,6 @@
 # Art Direction — Relight
 
-Reference: the design canvas "Relight — game stills" (7 frames: strategic, island, agent, culture, blessing, mobile strategic, mobile island). Match it.
+Reference: the design canvas "Relight — game stills" (7 frames: strategic, island, agent, culture, blessing, mobile strategic, mobile island): https://claude.ai/artifact/N7kSQnXR1JsNT32bzf551Y. Match it.
 
 ## Mood
 A documentary about an AI civilization. Cinematic sci-fi data visualization. Elegant, mysterious, premium. High contrast, lots of negative space. Never cartoonish.

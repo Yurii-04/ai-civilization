@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.bin binary
+# balance.toml is hashed into snapshots; line endings must never change.
+config/balance.toml text eol=lf
+crates/protocol/src/generated/** linguist-generated=true
+packages/protocol/src/generated/** linguist-generated=true

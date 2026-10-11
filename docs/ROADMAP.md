@@ -2,12 +2,13 @@
 
 Work top to bottom. Each milestone ends with a demo the human can run. Do not start a milestone before the previous one's exit criteria pass.
 
-## M0 — Repo foundation
+## M0 — Repo foundation (done)
 - Cargo workspace (`crates/`) + pnpm/Turborepo (`apps/`, `packages/`) with the layout in `CLAUDE.md`; `rust-toolchain.toml` pinned; strict TS, ESLint, Prettier, Vitest; rustfmt + clippy.
 - `schemas/` with a first FlatBuffers envelope + `pnpm codegen`.
 - docker compose: Postgres, Redis.
 - CI: cargo fmt/clippy/test (x86_64 + aarch64 + wasm32 determinism job), TS lint/typecheck/test.
 - **Exit:** `pnpm dev` boots empty apps; CI green on all targets.
+- Shipped: placeholder sim-core world (random walkers) with golden-hash determinism test; Ping/Pong/Subscribe envelope end-to-end (Rust fixture decoded in TS, web pings relay); holding page. Decisions in `docs/adr/0001-m0-foundation-tooling.md`. Bench regression gate (>15%) lands with real benches in M1.
 
 ## M1 — Headless simulation core (Rust)
 - `sim-core`: world grid for one island, agents (SoA), seeded RNG, spatial hash, NN forward pass, actions FORAGE/REST/MATE, energy, death, reproduction with crossover + mutation; `balance.toml`.

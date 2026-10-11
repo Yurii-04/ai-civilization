@@ -60,21 +60,29 @@ docs/                   product, simulation, architecture, art direction, roadma
 
 ```
 pnpm install
-pnpm dev                 # web + api + relay + sim-runner (docker compose for postgres/redis)
+scripts/install-flatc.sh # once: pinned flatc into .tools/bin (needed by codegen)
+pnpm dev                 # web :3000 + api :4000 + relay :9001 + sim-runner (starts docker compose postgres/redis if Docker is available)
+pnpm infra:up            # docker compose up -d --wait (postgres :5432, redis :6379); infra:down to stop
 pnpm codegen             # flatc: schemas/*.fbs -> crates/protocol + packages/protocol
+pnpm codegen:check       # regenerate and fail on diff (CI)
 pnpm test                # cargo test --workspace + vitest
-pnpm lint && pnpm typecheck   # includes cargo clippy -D warnings, cargo fmt --check, eslint, tsc
+pnpm lint && pnpm typecheck   # includes cargo clippy -D warnings, cargo fmt --check, eslint, prettier, tsc
+pnpm format              # prettier --write + cargo fmt
 
 # Rust only
 cargo test -p sim-core
-cargo test -p sim-core --test determinism      # same seed + inputs => identical world hash
+cargo determinism                              # alias: cargo test -p sim-core --test determinism (golden hash)
+cargo test -p sim-core --test determinism --target wasm32-wasip1   # same test under wasmtime
 cargo bench -p sim-core                        # tick benchmarks (criterion)
-cargo run -p sim-headless --release -- --seed 7 --days 30 --report out/
-cargo run -p sim-replay --release -- --snapshot <file> --inputs <file> --verify
+cargo headless --seed 7 --days 30 --report out/   # alias: cargo run -p sim-headless --release --
+cargo replay --snapshot <file> --inputs <file> --verify   # alias for sim-replay (implemented in M3)
+cargo runner --seed 7 --speed 2                # alias: cargo run -p sim-runner --release --
 wasm-pack build crates/sim-wasm --target web   # browser build
 
-pnpm db:migrate          # prisma migrate dev
+UPDATE_FIXTURES=1 cargo test -p protocol       # refresh schemas/fixtures (Rust->TS wire fixture)
 ```
+
+`pnpm db:migrate` (prisma migrate dev) arrives with the first Prisma models; see `docs/adr/0001-m0-foundation-tooling.md`.
 
 Always run sim binaries with `--release` for anything performance-related. If a command does not exist yet, add it (Cargo alias in `.cargo/config.toml` or a package script + `turbo.json`), then document it here.
 

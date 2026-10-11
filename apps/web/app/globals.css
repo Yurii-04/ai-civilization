@@ -1,0 +1,22 @@
+:root {
+  --void: #000000;
+  --text-primary: #f4f6f8;
+  --text-secondary: #8c96a3;
+  --text-timestamp: #6c7682;
+  --life: #ffc266;
+  --danger: #ff5a47;
+  --hairline: rgba(255, 255, 255, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--void);
+  color: var(--text-primary);
+  font-family: var(--font-mono), monospace;
+}

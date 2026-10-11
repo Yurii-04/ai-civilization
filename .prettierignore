@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+target/
+.tools/
+**/generated/**
+**/dist/**
+**/.next/**
+**/.turbo/**
+crates/sim-wasm/pkg/
+schemas/fixtures/
+*.md

@@ -1,0 +1,11 @@
+# Never set target-cpu=native: native and WASM builds must produce identical
+# floating-point results (see CLAUDE.md, hard rule 1).
+
+[alias]
+determinism = "test -p sim-core --test determinism"
+headless = "run -p sim-headless --release --"
+replay = "run -p sim-replay --release --"
+runner = "run -p sim-runner --release --"
+
+[target.wasm32-wasip1]
+runner = "wasmtime"

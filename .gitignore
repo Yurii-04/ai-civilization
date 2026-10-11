@@ -1,0 +1,24 @@
+# Rust
+/target
+
+# Node
+node_modules/
+.turbo/
+dist/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+coverage/
+
+# wasm-pack output
+crates/sim-wasm/pkg/
+
+# Local tools and env
+/.tools/
+.env
+.env.local
+
+# Headless reports
+/out/
+
+.DS_Store

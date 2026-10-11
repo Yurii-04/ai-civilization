@@ -1,0 +1,27 @@
+[package]
+name = "sim-core"
+description = "Relight simulation core: pure, deterministic, no I/O."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+libm.workspace = true
+rand_core.workspace = true
+rand_xoshiro.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+toml.workspace = true
+xxhash-rust.workspace = true
+
+[target.'cfg(not(target_family = "wasm"))'.dev-dependencies]
+criterion = { version = "0.5", default-features = false, features = ["cargo_bench_support"] }
+
+[[bench]]
+name = "tick"
+harness = false
+
+[lints]
+workspace = true

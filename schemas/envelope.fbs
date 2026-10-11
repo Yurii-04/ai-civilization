@@ -1,0 +1,43 @@
+// Relight wire protocol — the single source of truth.
+// Edit here, then run `pnpm codegen` and bump PROTOCOL_VERSION in
+// crates/protocol and packages/protocol (see CLAUDE.md -> How to work).
+//
+// Every message is an Envelope { version, type, tick, payload }: the union
+// tag (`payload_type`) is the message type. Relays read only version, type
+// and tick to route and forward the bytes untouched.
+
+namespace relight.protocol;
+
+/// Client -> server keepalive; also the round-trip probe in M0.
+table Ping {
+  /// Client-chosen nonce, echoed back in Pong.
+  nonce:uint;
+}
+
+/// Server -> client reply to Ping.
+table Pong {
+  nonce:uint;
+}
+
+/// Client -> server: replace the set of channels this connection receives.
+table Subscribe {
+  /// Channel names, e.g. "strategic", "island:vesper", "agent:23619E".
+  channels:[string];
+}
+
+union Payload {
+  Ping,
+  Pong,
+  Subscribe,
+}
+
+table Envelope {
+  /// PROTOCOL_VERSION of the sender.
+  version:ubyte;
+  /// Sim tick the message refers to (0 for control messages).
+  tick:uint;
+  payload:Payload;
+}
+
+root_type Envelope;
+file_identifier "RLGT";

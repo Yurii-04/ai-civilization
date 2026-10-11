@@ -1,0 +1,12 @@
+{
+  "name": "@relight/rust",
+  "private": true,
+  "description": "Turborepo entry point for the Cargo workspace at the repo root.",
+  "scripts": {
+    "dev": "cargo run -p sim-runner --release",
+    "build": "cargo build --workspace --release",
+    "test": "cargo test --workspace",
+    "lint": "cargo clippy --workspace --all-targets -- -D warnings && cargo fmt --all --check",
+    "typecheck": "cargo check --workspace --all-targets"
+  }
+}

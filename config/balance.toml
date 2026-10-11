@@ -1,0 +1,15 @@
+# Every simulation tuning number lives here (CLAUDE.md -> How to work).
+# Embedded into sim-core at build time; its hash is stored in every snapshot.
+# M0 holds only time and world-shape constants; agents/evolution arrive in M1.
+
+[time]
+ticks_per_second = 10
+ticks_per_day = 24000
+
+[world]
+islands = 5
+# M0 placeholder population: deterministic random walkers used by the
+# determinism harness until real agents land in M1.
+placeholder_walkers_per_island = 256
+island_radius = 64.0
+walker_speed = 0.35
